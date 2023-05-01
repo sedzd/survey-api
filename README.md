@@ -18,7 +18,7 @@ These instructions will help you to set up and run the project on your local mac
 1. Clone the repository:
 
 ```
-git clone https://github.com/yourusername/survey-api.git
+git clone https://github.com/sedzd/survey-api.git
 ```
 
 2. Go to the project directory:
