@@ -48,7 +48,7 @@ npm run migration:run
 6. Run the application:
 
 ```
-npm start
+npm run start:dev
 ```
 
 Now, the API server should be running on http://localhost:3000.
