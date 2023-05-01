@@ -162,3 +162,7 @@ Response:
   ...
 ]
 ```
+
+## ERD
+
+![image](https://user-images.githubusercontent.com/5009973/235509202-c0c6c1b0-d604-4d53-aa8d-6d8e961b3527.png)
