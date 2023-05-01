@@ -55,6 +55,12 @@ Now, the API server should be running on http://localhost:3000.
 
 ## API Endpoints
 
+Open API Specs are available at [OAS](./docs/oas.yaml)
+
+
+<img width="964" alt="image" src="https://user-images.githubusercontent.com/5009973/235511481-85b94e9e-2cb9-4f8d-9d01-196a8774d846.png">
+
+
 The API supports the following operations:
 
 1. `GET /` - Get the root endpoint to check if the application is running
