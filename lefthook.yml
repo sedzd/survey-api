@@ -6,7 +6,7 @@ pre-push:
       run: npm audit
     unit-test:
       tags: run unit tests
-      run: npm run test:unit
+      run: npm run test
 
 #
 pre-commit:
@@ -20,6 +20,3 @@ pre-commit:
       tags: format
       glob: '*.{js,ts,json,yml,yaml}'
       run: npm run format:check {staged_files}
-    oas:
-      tags: oas
-      run: npm run generate-client-oas --on-file ./docs/openapi.yaml && git add ./docs/public.yaml

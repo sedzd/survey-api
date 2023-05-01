@@ -2,14 +2,9 @@
 /build/**
 /coverage/**
 /docs/**
-/jsdoc/**
-/templates/**
 /tmp/**
-/tools/internal-rules/node_modules/**
-/lib/rules/utils/unicode/is-combining-character.js
 /dist/**
 /postgres-data/**
-/venv/**
 test.js
 /clients/**
 .eslintrc.js
