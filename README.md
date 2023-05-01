@@ -127,7 +127,7 @@ Request body:
     "answerId": "0b279ce0-f608-441b-9a96-4679f5d954df"
 }
 ```
-
+*P.S. userId is an arbitrary string connecting a user to their answer, providing more realistic scenarios for survey results. The User domain is beyond the scope of this task.*
 Response:
 
 ```json
