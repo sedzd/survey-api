@@ -1,0 +1,25 @@
+pre-push:
+  parallel: true
+  commands:
+    packages-audit:
+      tags: audit
+      run: npm audit
+    unit-test:
+      tags: run unit tests
+      run: npm run test:unit
+
+#
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      tags: lint
+      glob: '*.{js,ts}'
+      run: npm run lint {staged_files}
+    format:
+      tags: format
+      glob: '*.{js,ts,json,yml,yaml}'
+      run: npm run format:check {staged_files}
+    oas:
+      tags: oas
+      run: npm run generate-client-oas --on-file ./docs/openapi.yaml && git add ./docs/public.yaml

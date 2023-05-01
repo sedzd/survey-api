@@ -1,0 +1,273 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Survey API
+  description: A simple survey API allowing users to create surveys, answer surveys, and retrieve survey results.
+  contact:
+    email: saeedzandian@gmail.com
+servers:
+  - description: Local development
+    url: 'http://localhost:3000'
+tags:
+  - name: root
+  - name: survey
+paths:
+  /:
+    get:
+      summary: Home
+      operationId: index
+      tags:
+        - root
+      description: Get the root endpoint to check if the application is running
+      responses:
+        '200':
+          description: Application is running
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: You have successfully started the application!
+  /surveys:
+    post:
+      summary: Create a new survey
+      operationId: createSurvey
+      description: Create a new survey
+      tags:
+        - survey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  example: What is your favorite color?
+                answers:
+                  type: array
+                  uniqueItems: true
+                  example: ['Blue', 'Green', 'Red', 'Yellow']
+                  items:
+                    type: string
+                    example: Blue
+      responses:
+        '200':
+          description: The created survey
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: a84fc051-bd6a-42c5-b45a-68ef2342ba9d
+                  question:
+                    type: string
+                    example: what is your favorite color?
+                  answers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 49252c64-e85f-4d5d-accf-d6dc89f7fac8
+                        answer:
+                          type: string
+                          example: blue
+                  created:
+                    type: string
+                    format: date-time
+                    example: '2023-05-01 19:45:59'
+                  updated:
+                    type: string
+                    format: date-time
+                    example: '2023-05-01 19:45:59'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: answers must be unique values
+                  error_code:
+                    type: string
+                    example: API_VALIDATION_ERROR
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: SERVER_ERROR
+                  message:
+                    type: string
+                    example: Something unexpected happened
+  /surveys/{surveyId}/answer:
+    post:
+      summary: Answer a survey
+      operationId: answerSurvey
+      tags:
+        - survey
+      description: Answer a survey
+      parameters:
+        - name: surveyId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  example: '12347312'
+                answerId:
+                  type: string
+                  example: 0b279ce0-f608-441b-9a96-4679f5d954df
+      responses:
+        '200':
+          description: The survey has been answered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: e5607f45-c678-4a5a-896e-500d6ffe8d08
+                  userId:
+                    type: string
+                    example: '12347312'
+                  survey:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: ff74fd0b-9d98-4645-b59d-569d74261b0d
+                      question:
+                        type: string
+                        example: what is your favorite color?
+                  userAnswer:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 697445e4-c1d5-4b69-b9da-741720d8ce79
+                      answer:
+                        type: string
+                        example: blue
+                  created:
+                    type: string
+                    format: date-time
+                    example: '2023-05-01 22:17:39'
+                  updated:
+                    type: string
+                    format: date-time
+                    example: '2023-05-01 22:17:39'
+        '404':
+          description: Data not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: DATA_NOT_FOUND
+                  message:
+                    type: string
+                    example: answer is not found
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: DUPLICATE_ERROR
+                  message:
+                    type: string
+                    example: User already answered this survey
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                    example: SERVER_ERROR
+                  message:
+                    type: string
+                    example: Something unexpected happened
+  /surveys/{surveyId}/results:
+    get:
+      summary: Get the results of a survey
+      operationId: getSurveyResults
+      description: Get the results of a survey
+      tags:
+        - survey
+      parameters:
+        - name: surveyId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Survey results retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    answerId:
+                      type: string
+                      format: uuid
+                      example: 0b279ce0-f608-441b-9a96-4679f5d954df
+                    answer:
+                      type: string
+                      example: green
+                    count:
+                      type: string
+                      description: number of time this answer was selected
+                      example: '2'
+                    userIds:
+                      type: array
+                      description: list of users who selected this answer
+                      items:
+                        type: string
+                        example: '123473'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: id must be a valid UUID
+                  error_code:
+                    type: string
+                    example: API_VALIDATION_ERROR
