@@ -57,10 +57,10 @@ Now, the API server should be running on http://localhost:3000.
 
 The API supports the following operations:
 
-1. [GET /](#get-root) - Get the root endpoint to check if the application is running
-2. [POST /surveys](#post-surveys) - Create a new survey
-3. [POST /surveys/{surveyId}/answer](#post-surveys-surveyid-answer) - Answer a survey
-4. [GET /surveys/{surveyId}/results](#get-surveys-surveyid-results) - Get the results of a survey
+1. `GET /` - Get the root endpoint to check if the application is running
+2. `POST /surveys` - Create a new survey
+3. `POST /surveys/{surveyId}/answer` - Answer a survey
+4. `GET /surveys/{surveyId}/results` - Get the results of a survey
 
 ### GET /
 
@@ -157,7 +157,7 @@ Response:
     "answerId": "0b279ce0-f608-441b-9a96-4679f5d954df",
     "answer": "Green",
     "count": "2",
-    "userIds": ["123473"]
+    "userIds": ["123473", "123"]
   },
   ...
 ]
