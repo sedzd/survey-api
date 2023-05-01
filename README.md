@@ -128,6 +128,8 @@ Request body:
 }
 ```
 *P.S. userId is an arbitrary string connecting a user to their answer, providing more realistic scenarios for survey results. The User domain is beyond the scope of this task.*
+
+
 Response:
 
 ```json
