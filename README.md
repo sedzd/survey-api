@@ -53,6 +53,14 @@ npm run start:dev
 
 Now, the API server should be running on http://localhost:3000.
 
+
+
+To run tests:
+
+```
+npm run test
+```
+
 ## API Endpoints
 
 Open API Specs are available at [OAS](./docs/oas.yaml)
